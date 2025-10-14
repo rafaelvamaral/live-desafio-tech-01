@@ -2,9 +2,9 @@ name: "Terraform"
 
 on:
   push: 
-    branches: ["dev"]
-    paths: ["src/**"]
-  workflow_dispatch:
+    branches: ["dev"] # Disparar o workflow em pushes para a branch "dev"
+    paths: ["src/**"] #
+  workflow_dispatch: # Permitir execução manual do workflow
 
 jobs: 
   terraform:
@@ -21,7 +21,10 @@ jobs:
           
       - name: Checkout
         uses: actions/checkout@v4
-      
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
       - name: Terraform init
         working-directory: ./src
         run: terraform init -backend-config="bucket=${{ secrets.AWS_BUCKET_NAME }}" -backend-config="key=${{ secrets.AWS_BUCKET_FILE }}"

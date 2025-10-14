@@ -35,7 +35,7 @@ module "eks" {
   enable_cluster_creator_admin_permissions = true
 
   subnet_ids = module.vpc.private_subnets
-  vpc_id     = module.vpc.default_vpc_id
+  vpc_id     = module.vpc.vpc_id
 
   endpoint_public_access = true
 
